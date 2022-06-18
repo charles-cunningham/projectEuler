@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # HEADER --------------------------------------------
 #
 # Author: Charles Cunningham
@@ -20,7 +18,7 @@
 
 # SET PARAMETERS ------------------------------------
 
-# Fibonacci values cannot exceed this value
+# Fibonacci numbers cannot exceed this value
 maxN = 4000000
 
 ### CODE --------------------------------------------
