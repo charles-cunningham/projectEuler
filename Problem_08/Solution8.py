@@ -8,15 +8,29 @@
 # Script Description: Largest product in a series
 #
 # The four adjacent digits in the 1000-digit number that have 
-# the greatest product are 9 × 9 × 8 × 9 = 5832. 
+# the greatest product are 9 x 9 x 8 x 9 = 5832. 
 #
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. 
 # What is the value of this product?
 
+# SET FUNCTION ------------------------------------
+
+# Set funtion to multiply all elements in list together
+def prodList(List) :
+
+    # Set product object
+    prod = 1
+    
+    # Multiply elements one at a time
+    for i in List:
+         prod = prod * i
+        
+    return prod
+
 # SET PARAMETERS ----------------------------------
 
 # Set the long number to check digits of
-numberString <- "
+numberString = """
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -37,51 +51,46 @@ numberString <- "
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
-"
+"""
 
 # Set number of adjacent digits to check
-nAdjDigits <- 4
+nAdjDigits = 13
 
 ### CODE ------------------------------------------
 
 # Get rid of return characters to tidy number string
-number <- gsub("\n", "", numberString)
+number = ''.join(numberString.splitlines())
 
-# Find character length of number (i.e. number of digits)
-totalDigits <- nchar(number)
-
-# Create empty object to fill in with loop with numbers of largest product
-maxNumbers <- NA
-
-# Create empty object to fill in with loop with largest product 
-maxProd <- 0
+# Create two empty objects to fill in loop with 
+# largest product, and numbers of largest product
+maxProd = 0
+maxNumbers = 0
 
 # Loop though every possible frame, from 1 to the last start point
-for (i in 1: (totalDigits - (nAdjDigits - 1))) {
-   
-  # Set starting "frame" with start and stop point for frame
-  startN <- i
-  stopN <- startN + (nAdjDigits - 1)
-  
-  # Get character string of numbers in frame
-  frameStr <- substr(number, startN, stopN)
-  
-  # Split to list
-  frameLs <- strsplit(frameStr , "")
-  
-  # Convert to integer
-  frameNumbers <- lapply(frameLs, as.integer)
-  
-  # Find product
-  frameProd <- prod(unlist(frameNumbers))
-  
-  # Check if the product of this frame is the biggest so far, 
-  if (frameProd > maxProd) { 
-    
-    maxProd <- frameProd # ...if so, overwrite maxProd
-    maxNumbers <- 
-    }
-}
+for i in range(0, len(number) - (nAdjDigits - 1)):
 
+    # Set starting "frame" with start and stop point for frame
+    startN = i
+    stopN = startN + nAdjDigits
+    
+    # Get character string of numbers in frame (starts from StartN + 1)
+    frameStr = number[startN:stopN]
+    
+    # Split to list
+    frameLs = list(frameStr)
+    
+    # Convert to integer
+    frameNumbers = list(map(int, frameLs))
+    
+    # Find product
+    frameProd = prodList(frameNumbers)
+    
+    # Check if the product of this frame is the biggest so far, if so... 
+    if frameProd > maxProd:
+        
+        maxProd = frameProd # ... overwrite maxProd,
+        maxNumbers = frameNumbers # and maxNumbers
+    
 # Output solution
-print(maxProd)
+print(maxNumbers); print(maxProd)
+
