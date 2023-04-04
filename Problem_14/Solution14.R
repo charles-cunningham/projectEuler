@@ -24,62 +24,69 @@
 # Which starting number, under one million, produces the longest chain?
 #
 # NOTE: Once the chain starts the terms are allowed to go above one million.
+#
 
 # SET PARAMETERS ----------------------------------
 
 # Starting number must be below which value
-maxStart = 1000000
+maxStart <- 1000000
 
-# FUNCTIONS ---------------------------------------
+# FUNCTION ----------------------------------------
 
 # Define function for one chain step of Collatz sequence
-def collatzFun(value) :
+collatzFun <- function(value) {
+  
+  # If input value is even...
+  if (value %% 2 == 0) {
     
-    # If input value is even...
-    if (value % 2 == 0):
-        
-        # ...divide by 2
-        valueOut = value / 2
+    # ...divide by 2
+    valueOut <- value / 2
     
     # Or else it must be odd, so...
-    else: 
-        
-        # ...multiply by 3 and add 1
-        valueOut = 3 * value + 1
+  } else {
     
-    return valueOut
+    # ...multiply by 3 and add 1
+    valueOut <- 3 * value + 1
+    
+  }
+  return(valueOut)
+}
 
-# SOLUTION ---------------------------------------
-
+# SOLUTION ---------------------------------------------    
+    
 # Create longest sequence objects
-longestSeq = 0 # Sequence length
-longestStart = 0 # Starting number
+longestSeq <- 0 # Sequence length
+longestStart <- 0 # Starting number
 
 # Loop through from maxStart/2 to maxStart
 # N.B. Longest start must be in this range as numbers < maxStart/2
 # can all be obtained by dividing numbers > maxStart /2 by two which
 # is a Collatz step [hence Collatz(2n) > Collatz(n)]
-for i in range( int(maxStart/2), maxStart ):
-
-    # Set number to be i, and sequence length to 1
-    number = i
-    seqLength = 1
-
-    # While loop to progress through Collatz sequence for i
-    while (number > 1):
-        
-        # Move along a stage in Collatz sequence
-        number = collatzFun(number)
-        
-        # Add one to sequence length
-        seqLength = seqLength + 1
-
-    # If sequence length is greater than existing longest length...
-    if (seqLength > longestSeq):
-        
-        # Update longest length and start number
-        longestSeq = seqLength
-        longestStart = i
+for (i in (maxStart/2 + 1): maxStart) {
+  
+  # Set number to be i, and sequence length to 1
+  number <- i
+  seqLength <- 1
+  
+  # While loop to progress through Collatz sequence for i
+  while (number > 1) { 
+    
+    # Move along a stage in Collatz sequence
+    number <- collatzFun(number)
+    
+    # Add one to sequence length
+    seqLength <- seqLength + 1
+  }
+  
+  # If sequence length is greater than existing longest length...
+  if (seqLength > longestSeq) {
+    
+    # Update longest length and start number
+    longestSeq <- seqLength
+    longestStart <- i
+  }
+}
 
 # Return solution
 print(longestStart)
+
