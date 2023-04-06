@@ -14,15 +14,10 @@
 # How many such routes are there through a 20×20 grid?
 #
 
-### IMPORT LIBRARIES
-
-# Import NumPy
-import math
-
 # SET PARAMETERS ----------------------------------
 
 # Grid size (i.e. length of one side of *square* grid)
-gridLength = 20
+gridLength <- 20
 
 # SOLUTION ---------------------------------------
 
@@ -32,7 +27,7 @@ gridLength = 20
 # number of "down" and "right" from route length to end up at bottom right. 
 # Hence can reformulate 'n choose r' equation, i.e. n! / (n - r)! * r! into:
 # N.B. grid is square so route length is gridLength x 2 and n-r == r
-nRoutes = math.factorial(gridLength * 2) / (math.factorial(gridLength) ** 2 )
+nRoutes <- factorial(gridLength * 2) / (factorial(gridLength) ^ 2 )
 
 # Print solution
 print(nRoutes)
