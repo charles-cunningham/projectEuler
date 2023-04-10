@@ -12,24 +12,34 @@
 # What is the sum of the digits of the number 2^1000?
 #
 
-### IMPORT LIBRARIES
+### LOAD PACKAGES
+
+library(tidyverse)
+library(gmp)
 
 # SET PARAMETERS ----------------------------------
 
 # Set base and exponent
-base = 2
-exponent = 1000
+base <- 2
+exponent <- 1000
 
 # SOLUTION ---------------------------------------
 
 # Find number
-number = base ** exponent
+# N.B. R cannot deal with extremely large numbers without rounding
+# 'gmp' package is needed to deal with these correctly
+number <- as.bigz(base) ^ exponent
 
 # Convert number to list of individual digits
-digits = [int(x) for x in str(number)]
+digits <- number %>%
+  format(., scientific = FALSE) %>%
+  as.character %>% # Convert to character string
+  strsplit(., "") %>% # Split to digits (outputs list)
+  .[[1]] %>% # Convert from list to character vector
+  as.integer # Convert to integer vector
 
 # Sum digits
-digitSum = sum(digits)
+digitSum <- sum(digits)
 
 # Print solution
 print(digitSum)

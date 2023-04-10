@@ -16,7 +16,6 @@
 
 ### IMPORT LIBRARIES
 
-# Import NumPy
 import math
 
 # SET PARAMETERS ----------------------------------
